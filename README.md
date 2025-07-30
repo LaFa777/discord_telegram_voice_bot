@@ -32,6 +32,28 @@ docker rm discord-telegram-bot
 docker build -t discord-telegram-bot .
 ```
 
+Автозапуск
+
+```bash
+nano /etc/systemd/system/discord-telegram-bot.service
+```
+
+```bash
+[Unit]
+Description=Discord Telegram Bot (Docker)
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a discord-telegram-bot
+ExecStop=/usr/bin/docker stop -t 2 discord-telegram-bot
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
 ```bash
 sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
