@@ -26,7 +26,7 @@ async def on_ready():
 @client.event
 async def on_voice_state_update(member, before, after):
     if before.channel is None and after.channel is not None:
-        message = f"{member.display_name} зашел в голосовой канал '{after.channel.name}'"
+        message = f"{member.display_name} зашел в голосовой канал '{after.channel.name}'. Количество челиков: {len(after.channel.members)}"
         print(message)
         send_telegram_message(message)
 
